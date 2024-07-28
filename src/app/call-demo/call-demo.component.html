@@ -1,0 +1,37 @@
+<ol>
+  <li>
+    <button id="connect" [disabled]="disableConnectBtn" (click)="connectCall()">Connect</button>
+    with <code><span id="server">{{webSocketServer}}</span></code></li>
+  <li>
+    <button id="call" [disabled]="disableCallBtn" (click)="makeCall()">Place Call</button>
+    with <code><span id="target">{{target}}</span></code></li>
+  <li>
+    <button id="hangup" [disabled]="disableHangupBtn" (click)="hangupCall()">Hangup Call</button>
+  </li>
+  <li>
+    <button id="disconnect" [disabled]="disableDisconnectBtn" (click)="disconnectCall()">Disconnect</button>
+  </li>
+</ol>
+
+<div class="dropdown-container">
+  <span>Speaker Devices:</span>
+  <select [(ngModel)]="activeSpeaker"
+          (change)="onSpeakerChanged()">
+    <option *ngFor="let device of speakerDevices"
+            [ngValue]="device.deviceId">{{device.label}}</option>
+  </select>
+</div>
+
+<div class="dropdown-container">
+  <span>Microphone Devices:</span>
+  <select [(ngModel)]="activeMicrophone"
+          (change)="onMicrophoneChanged()">
+    <option *ngFor="let device of microphoneDevices"
+            [ngValue]="device.deviceId">{{device.label}}</option>
+  </select>
+</div>
+
+
+<audio #remoteAudio id="remoteAudio">
+  <p>Your browser doesn't support HTML5 audio.</p>
+</audio>
